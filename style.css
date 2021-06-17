@@ -1,0 +1,314 @@
+/* Global ================== */
+:root {
+    --dark-blue: #363f5f; /* Variaveis: Dark-Blue, Green and light-green */
+    --green: #49aa26;
+    --light-green: #3dd705;
+    --red: #e92929;
+    
+}
+* { /*Seletor universal */
+    margin: 0;
+    padding: 0; /*Preenchimento interno dos elementos */
+    box-sizing: border-box; /*Medida da caixa (a partir do conteudo) */
+} /* Padrao para resetar o documento */
+
+html {
+    font-size: 93.75%; /* 15px */
+}
+
+body {
+    background: #f0f2f5;
+    font-family: 'poppins', sans-serif;
+}
+
+.sr-only { /*Bloco abaixo é um trick CSS. Mantem ele visivel para os leitores na tela */
+           /*porem permanece invisivel ao Dev. */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border-width: 0;/* mostra o pixel como e border: solid 1px red;*/
+}
+
+.container {
+    width: min(90vw, 800px); /* Função. 2 argumentos */
+
+    margin: auto; /*Organiza as laterais */
+}
+
+/* Titles =============== */
+h2 {
+    margin-top: 3.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--dark-blue);
+
+    font-weight: normal;
+}
+
+/* Links & Buttons ========== */
+
+a {
+    color: var(--green);
+    text-decoration: none;
+}
+
+a:hover{
+    color: var(--light-green);
+}
+
+button {
+    width: 100%;
+    height: 50px;
+
+    border: none;
+
+    color: white;
+    background: var(--green);
+
+    padding: 0;
+
+    border-radius: 0.25rem;
+
+    cursor: pointer; /*Quando passar o mouse em cima fica a mãozinha */
+}
+
+button:hover { /*Quando passar o mouse em cima fica na cor do background */
+    background: var(--light-green);
+}
+
+.button.new {
+    display: inline-block;
+    margin-bottom: .8rem;
+}
+
+.button.cancel {
+    color: #e92929;
+    border: 2px var(--red) solid;
+    border-radius: 0.25rem;
+
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0.6;
+}
+
+.button.cancel:hover { /*Quando passar o mouse em cima fica na cor do background */
+    opacity: 1;
+}
+
+/* Header =============== */
+header {
+    background: #2d4a22;
+    padding: 2rem 0 10rem; /*Trabalha como ponteiro do relogio: Topo, direito, baixo e esquerdo */
+    text-align: center;
+}
+
+#logo {
+    color: #fff; /*Cor em hexadecimal */
+    font-weight: 100; /*Peso da fonte */
+}
+
+/* Balance =============== */
+#balance {
+    margin-top:  -8rem;
+}
+
+#balance h2 {
+    color: white;
+    margin-top: 0;    
+}
+
+/* Cards ================ */
+.card {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 0.25rem;
+
+    margin-bottom: 2rem;
+
+    color: var(--dark-blue);
+}
+
+.card h3 {
+    font-weight: normal;
+    font-size: 1rem;
+
+    display: flex; /*Muda o comportamento dos elementos dentro da caixa */
+    align-items: center; 
+    justify-content: space-between;
+}
+
+.card p{
+    font-size: 2rem;
+    line-height: 3rem;
+
+    margin-top: 1rem;
+}
+
+.card.total {
+    background: var(--green);
+    color: white;
+    
+}
+
+/* Table =============== */
+#transaction {
+    display: block;
+    width: 100%;
+    
+    /*overflow: hidden; | O que esta transbordando na API */
+    overflow-x: auto; /*Criar a rolagem do eixo X quando necessario na caixa #transaction */
+}
+
+#data-table{
+    width: 100%;
+    border-spacing: 0 0.5rem;
+    color: #969cb3;
+}
+
+/*O codigo abaixo (as *pseudoclass*)tem por finalidade arredondar as bordas da tabela em questao */
+table thead tr th:first-child, /*first-child e uma pseudo classe */
+table tbody tr td:first-child 
+{
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+table thead tr th:last-child, /*last-child e uma pseudo classe */
+table tbody tr td:last-child
+{
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+table thead th {
+    background: white;
+    
+    font-weight: normal;
+    padding: 1rem 2rem;
+    
+    text-align: left;
+}
+
+table tbody tr {
+    opacity: 0.7;
+}
+
+table tbody tr:hover {
+    opacity: 1;
+}
+
+table tbody td {
+    background: white;
+    padding: 1rem 2rem;
+}
+
+td.description {
+    color: var(--dark-blue);
+}
+
+td.income {
+    color: #12a454;
+}
+
+td.expense {
+    color: #e92929;
+}
+
+/*Modal ================= */
+.modal-overlay {
+    width: 100%;
+    height: 100%;
+    /*Caixa ocupar 100% de tudo o que tiver */
+    background-color: rgba(0, 0, 0, 0.7);
+
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    align-items: center; /*Centraliza os itens da caixa no eixo vertical */
+    justify-content: center; /*Centraliza os itens da caixa no eixo horizontal */
+
+    opacity: 0;
+    visibility: hidden; /*sumir com a div*/
+
+    z-index: 999;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: #f0f2f5;
+    padding: 2.4rem;
+
+    position: relative;
+    z-index: 1;
+}
+
+/*Form ================= */
+
+#form { /*DIV form */
+    max-width: 500px;
+}
+
+#form h2 {
+    margin-top: 0;
+}
+
+input {
+    border: none;
+    border-radius: 0.2rem;
+
+    padding: 0.8rem;
+
+    width: 100%;
+}
+
+.input-group {
+    margin-top: 0.8rem;
+}
+
+.input-group .help{
+    opacity: 0.4;
+}
+
+.input-group.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-group.actions .button,
+.input-group.actions button {
+    width: 48%; /*Largura */
+}
+
+/* Footer =============== */
+footer {
+    text-align: center;
+    padding: 4rem 0 2rem;
+    color: var(--dark-blue);
+
+    opacity: 0.6;
+}
+
+/* Responsive ============ */
+@media (min-width: 800px) {  /*At rules (regras que recebem o @ (at) | A partir de 800px aplica o bloco abaixo */
+    html {
+        font-size: 87.5%; /* 14px */ 
+    }
+
+    #balance {
+        /*display: flex; /*Comportamento (dos elementos da caixa BALANCE) fica um ao lado do outro. Sem ele comportamento fica um abaixo do outro */
+        display: grid; /*Trabalha em x e y */
+        grid-template-columns: repeat(3, 1fr); /*Funcao repeat numero de repeticoes da fracao 1fr */
+        gap: 2rem; /*Espaço entre os elementos */
+    }
+}
